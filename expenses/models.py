@@ -3,7 +3,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 
-
 class Expense(models.Model):
     class Category(models.TextChoices):
         FOOD = "food", "Food"

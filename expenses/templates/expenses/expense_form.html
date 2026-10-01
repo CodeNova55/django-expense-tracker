@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Expense{% endblock %}
+{% block content %}
+  <h2>{% if object %}Edit expense{% else %}Add expense{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Save</button>
+    <a href="{% url 'expense_list' %}">Cancel</a>
+  </form>
+{% endblock %}
