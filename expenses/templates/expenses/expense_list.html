@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}My Expenses{% endblock %}
+{% block content %}
+  <p><a class="btn" href="{% url 'expense_create' %}">+ Add expense</a></p>
+  {% if expenses %}
+    <table>
+      <tr><th>Date</th><th>Title</th><th>Category</th><th>Amount (KES)</th><th></th></tr>
+      {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.date }}</td>
+          <td>{{ expense.title }}</td>
+          <td><span class="badge">{{ expense.get_category_display }}</span></td>
+          <td>{{ expense.amount }}</td>
+          <td>
+            <a href="{% url 'expense_update' expense.pk %}">Edit</a> ·
+            <a href="{% url 'expense_delete' expense.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No expenses yet. Add your first one!</p>
+  {% endif %}
+{% endblock %}

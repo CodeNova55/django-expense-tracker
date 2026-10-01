@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Monthly summary{% endblock %}
+{% block content %}
+  <h2>Summary for {{ month_start|date:"F Y" }}</h2>
+  <p>
+    <a href="?month={{ previous_month }}">&larr; Previous</a> &middot;
+    <a href="?month={{ next_month }}">Next &rarr;</a>
+  </p>
+  <p>Total spent: <strong>KES {{ total }}</strong> across {{ count }} expense{{ count|pluralize }}</p>
+
+  {% for item in breakdown %}
+    <div style="margin-bottom:.75rem">
+      <div style="display:flex; justify-content:space-between">
+        <span>{{ item.label }}</span>
+        <span>KES {{ item.total }} ({{ item.percent }}%)</span>
+      </div>
+        <progress value="{{ item.percent }}" max="100" style="width:100%">{{ item.percent }}%</progress>
+    </div>
+  {% empty %}
+    <p>No expenses recorded for this month.</p>
+  {% endfor %}
+{% endblock %}
